@@ -1,4 +1,5 @@
 import re
+import textwrap
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -21,13 +22,14 @@ class Email:
             self.recipients = [self.recipients]
 
     def __repr__(self):
-        return f"""
+        content = f"""
             Status: {self.status}
             Кому: {self.get_recipients_str()}
             От: {self.sender.masked}
-            Тема: {self.subject}, дата {self.date}
+            Тема: {self.subject}, дата {self.date:%d.%m.%Y %H:%M}
             {self.short_body or self.body}
         """
+        return textwrap.dedent(content).strip()
 
     @staticmethod
     def __normalize_text(text: str):
