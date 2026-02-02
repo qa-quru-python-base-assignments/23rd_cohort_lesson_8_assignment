@@ -22,11 +22,13 @@ class Email:
             self.recipients = [self.recipients]
 
     def __repr__(self):
+        date_str = f"{self.date:%d.%m.%Y %H:%M}" if self.date else "не указана"
+
         content = f"""
             Status: {self.status}
             Кому: {self.get_recipients_str()}
             От: {self.sender.masked}
-            Тема: {self.subject}, дата {self.date:%d.%m.%Y %H:%M}
+            Тема: {self.subject}, дата {date_str}
             {self.short_body or self.body}
         """
         return textwrap.dedent(content).strip()
