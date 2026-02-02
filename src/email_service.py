@@ -17,7 +17,7 @@ class EmailService:
                     body=self.email.body,
                     sender=self.email.sender,
                     recipients=recipient,
-                    short_body=self.email.short_body if self.email.short_body is not None else self.email.add_short_body(),
+                    short_body=self.email.short_body if self.email.short_body else self.email.add_short_body(),
                     date=datetime.now(),
                     status=Status.SENT if self.email.status == Status.READY else Status.FAILED
                 )
